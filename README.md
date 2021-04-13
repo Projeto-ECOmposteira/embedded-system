@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Projeto-ECOmposteira_embedded-system&metric=alert_status)](https://sonarcloud.io/dashboard?id=Projeto-ECOmposteira_embedded-system)
+
 # embedded-system
 
 ## Instalação
@@ -29,5 +31,4 @@ upip.install("micropython-umqtt.simple2")
 ```bash
 picocom /dev/ttyUSB0 -b115200
 ```
-
 
