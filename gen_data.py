@@ -32,12 +32,11 @@ if __name__ == '__main__':
     topic = b'notification'
     samples = 10
 
-    client = MQTTClient(client_1, server, port=1883, user='mosquitto')
+    client = MQTTClient(client_id, server)
 
     client.connect()
 
     for data in data_gen(samples):
-        print('test')
 
         print(data)
 
