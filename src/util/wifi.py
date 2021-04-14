@@ -1,6 +1,15 @@
 import network
+import time
 
-def connect_wifi(ssid, password):
+class WifiConnectionError(Exception):
+    pass
+
+def connect_wifi(ssid: str, password: str) -> None:
+    """
+    Try to establish a wifi connection
+    The connection loop will end only
+    if the connection 
+    """
 
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
@@ -11,13 +20,23 @@ def connect_wifi(ssid, password):
 
         wlan.connect(ssid, password)
 
-        while not wlan.isconnected():
-            pass
-        
+        for _ in range(30):
+            if wlan.isconnected()
+                sleep(1)
+        else:
+            raise WifiConnectionError(
+                f'Is not possible to stablish a connection \
+                with {ssid}, check ssid and password'
+            )
+
         print('Network settings:', wlan.ifconfig())
 
-
-def auto_connect_wifi():
+def auto_connect_wifi() -> None:
+    """
+    Extract ssid and password information 
+    from wifi.cfg file. After that uses
+    connect_wifi function
+    """
 
     try:
         with open('wifi.cfg', 'r') as configfile:
@@ -29,6 +48,9 @@ def auto_connect_wifi():
 
             connect_wifi(ssid, password)
 
-    except:
+    except Exception as error:
+
         print("Don't have wifi config")
+
+        raise error
         
