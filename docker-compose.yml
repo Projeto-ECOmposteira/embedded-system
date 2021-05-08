@@ -8,3 +8,11 @@ services:
       - 1883:1883
     volumes:
       - "./config/mosquitto.conf:/mosquitto/config/mosquitto.conf"
+
+  broker-image:
+    build:
+      context: docker/broker/
+      dockerfile: Dockerfile
+    ports:
+      - 9001:9001
+      - 1883:1883

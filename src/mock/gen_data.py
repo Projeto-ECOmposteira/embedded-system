@@ -3,6 +3,9 @@ import json
 from time import sleep
 from random import random
 from umqtt.simple2 import MQTTClient
+from machine import RTC
+
+rtc = RTC()
 
 def create_random_example() -> str:
     """
@@ -11,10 +14,16 @@ def create_random_example() -> str:
     """
 
     data = {
-        'data1' : random(),
-        'data2' : random(),
-        'data3' : random(),
-        'data4' : random(),
+        'weight' : random(),
+        'ph' : random(),
+        'cn' : random(),
+        'oxigen' : random(),
+        'temperature' : random(),
+        'pressure': random(),
+        'humidity': random(),
+        'co2': random(),
+        'timestamp': '%.2d:%.2d:%.2dT%.2d:%.2d:%.2d' % rtc.datetime()[:-2],
+
     }
 
     return json.dumps(data)

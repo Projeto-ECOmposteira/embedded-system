@@ -2,13 +2,20 @@ from util.wifi import auto_connect_wifi
 from mock.gen_data import data_gen
 
 from umqtt.simple2 import MQTTClient
+from wifi import wifimgr
 
 if __name__ == '__main__':
 
-    # try to create wifi connection
-    auto_connect_wifi()
+    wlan = wifimgr.get_connection()
 
-    server = '10.0.0.105'
+    if wlan is None:
+        print("Could not initialize the network connection.")
+        while True:
+            pass  # you shall not pass :D
+
+    print("Starting Server")
+
+    server = '10.0.0.145'
     client_id = 'client1'
     topic = b'notification'
 
@@ -16,6 +23,7 @@ if __name__ == '__main__':
     client.connect()
 
     for data in data_gen(30):
+        print("Publicando")
         client.publish(topic, data)
 
     client.disconnect()
