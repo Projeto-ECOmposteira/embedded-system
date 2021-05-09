@@ -1,5 +1,3 @@
-import json
-
 from time import sleep
 from random import random
 from umqtt.simple2 import MQTTClient
@@ -26,7 +24,7 @@ def create_random_example() -> str:
 
     }
 
-    return json.dumps(data)
+    return data
 
 def data_gen(samples: int, sleeptime: int=1) -> str:
     """
@@ -36,6 +34,17 @@ def data_gen(samples: int, sleeptime: int=1) -> str:
     """
 
     for _ in range(samples):
+
+        sleep(sleeptime)
+
+        yield create_random_example()
+
+def data_gen_loop(sleeptime: int=1) -> str:
+    """
+    Generate JSON messages with sleeptime has a interval.
+    """
+
+    while True:
 
         sleep(sleeptime)
 

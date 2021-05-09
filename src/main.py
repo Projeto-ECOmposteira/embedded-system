@@ -1,5 +1,7 @@
+import json
+
 from util.wifi import auto_connect_wifi
-from mock.gen_data import data_gen
+from mock.gen_data import data_gen_loop
 
 from umqtt.simple2 import MQTTClient
 from wifi import wifimgr
@@ -15,14 +17,18 @@ if __name__ == '__main__':
 
     print("Starting Server")
 
-    server = '10.0.0.145'
-    client_id = 'client1'
-    topic = b'notification'
+    server = 'test.mosquitto.org'
+    client_id = 'composteira1'
+    topic = 'ecomposteira/composter/measurements'
+    topic = topic.encode()
 
-    client = MQTTClient(client_id, server, ssl=False, port=1883)
+    client = MQTTClient(client_id, server, port=1883)
     client.connect()
 
-    for data in data_gen(30):
+    for data in data_gen_loop(sleeptime=60):
+
+        data['mac'] = wlan.config('mac')
+        data = json.dumps(data)
         print("Publicando")
         client.publish(topic, data)
 
