@@ -2,7 +2,7 @@
 
 BAUD=115200
 
-DEVICE=/dev/ttyUSB1
+DEVICE=/dev/ttyUSB0
 
 COMMAND="sudo ./scripts/pyboard.py -b $BAUD -d $DEVICE"
 

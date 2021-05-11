@@ -1,4 +1,5 @@
 import json
+import ubinascii
 
 from util.wifi import auto_connect_wifi
 from mock.gen_data import data_gen_loop
@@ -27,9 +28,10 @@ if __name__ == '__main__':
 
     for data in data_gen_loop(sleeptime=60):
 
-        data['mac'] = wlan.config('mac')
+        data['macAddress'] = ubinascii.hexlify(wlan.config('mac'), ':').decode()
         data = json.dumps(data)
-        print("Publicando")
+        print("Publicando %s" % data)
+
         client.publish(topic, data)
 
     client.disconnect()
