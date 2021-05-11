@@ -22,3 +22,9 @@ $COMMAND -f mkdir mock
 $COMMAND -f cp src/mock/__init__.py :mock/__init__.py
 $COMMAND -f cp src/mock/gen_data.py :mock/gen_data.py
 
+$COMMAND -f rm wifi/__init__.py
+$COMMAND -f rm wifi/wifimgr.py
+$COMMAND -f rmdir wifi
+$COMMAND -f mkdir wifi
+$COMMAND -f cp src/wifi/__init__.py :wifi/__init__.py
+$COMMAND -f cp src/wifi/wifimgr.py :wifi/wifimgr.py
